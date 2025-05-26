@@ -14,6 +14,14 @@ It helps users reflect on their day, track emotional states, set goals, and rece
 
 ---
 
+## 🛠️ Development Environment
+
+- **Node.js**: v20.19.2
+- **Python**: 3.11.12
+
+
+---
+
 ## ✨ Key Features
 
 ### 🧠 Daily Mood Tracking
