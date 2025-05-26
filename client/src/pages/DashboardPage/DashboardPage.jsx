@@ -1,3 +1,12 @@
+import { useEffect, useState } from "react";
+import { fetchStatus } from "../../api/gptService";
+
 export default function DashboardPage() {
-  return <div>DashboardPage</div>;
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    fetchStatus().then((data) => setStatus(data.status));
+  }, []);
+
+  return <div>Server status: {status}</div>;
 }
