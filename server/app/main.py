@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from app.routers import status, gpt
+from app.routers import status, gpt, entry
 from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
@@ -14,3 +15,5 @@ app.add_middleware(
 
 app.include_router(status.router, prefix="/api")
 app.include_router(gpt.router, prefix="/api")
+
+app.include_router(entry.router, prefix="/api")

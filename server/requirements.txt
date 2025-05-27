@@ -3,3 +3,6 @@ uvicorn
 openai
 python-dotenv
 requests
+sqlalchemy
+psycopg2-binary
+alembic
