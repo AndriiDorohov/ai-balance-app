@@ -1,12 +1,13 @@
 from openai import OpenAI
 from app.core.config import OPENAI_API_KEY
+import re
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_summary(entry_text: str) -> dict:
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {
                     "role": "system",
@@ -14,19 +15,29 @@ def generate_summary(entry_text: str) -> dict:
                 },
                 {
                     "role": "user",
-                    "content": f"Entry: {entry_text}\n\nReturn:\n- Summary\n- Detected mood\n- 1 useful recommendation"
+                    "content": (
+                        f"Entry: {entry_text}\n\n"
+                        "Return in the format:\n"
+                        "- Summary: ...\n"
+                        "- Detected mood: ...\n"
+                        "- Recommendation: ..."
+                    )
                 }
             ],
             temperature=0.7,
             max_tokens=300,
         )
 
-        gpt_message = response.choices[0].message.content.strip()
+        content = response.choices[0].message.content.strip()
+
+        summary_match = re.search(r"Summary:\s*(.*?)(?:\n|$)", content)
+        mood_match = re.search(r"Detected mood:\s*(.*?)(?:\n|$)", content)
+        recommendation_match = re.search(r"Recommendation:\s*(.*)", content)
 
         return {
-            "summary": gpt_message,
-            "mood": "auto",
-            "recommendation": "from GPT"
+            "summary": summary_match.group(1).strip() if summary_match else "Not found",
+            "mood": mood_match.group(1).strip() if mood_match else "Not found",
+            "recommendation": recommendation_match.group(1).strip() if recommendation_match else "Not found"
         }
 
     except Exception as e:
