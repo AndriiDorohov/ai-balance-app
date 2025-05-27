@@ -1,0 +1,19 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.linkText {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+}

@@ -33,3 +33,14 @@ button {
     color: red;
     margin-top: 1rem;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.success {
+    color: green;
+    margin-bottom: 1rem;
+}
