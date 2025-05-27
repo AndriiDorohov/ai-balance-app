@@ -11,16 +11,18 @@ def generate_summary(entry_text: str) -> dict:
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that summarizes emotional journal entries and provides insight."
+                    "content": (
+                        "You are a helpful assistant that summarizes emotional journal entries and provides insight."
+                    )
                 },
                 {
                     "role": "user",
                     "content": (
                         f"Entry: {entry_text}\n\n"
-                        "Return in the format:\n"
-                        "- Summary: ...\n"
-                        "- Detected mood: ...\n"
-                        "- Recommendation: ..."
+                        "Return only the following:\n"
+                        "- Summary: (short summary)\n"
+                        "- Detected mood: (1-3 words)\n"
+                        "- Recommendation: (1 actionable advice)"
                     )
                 }
             ],

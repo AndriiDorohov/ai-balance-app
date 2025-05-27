@@ -1,6 +1,6 @@
 
 from app.db.session import Base
-from app.models import entry
+from app.models.entry import Entry
 
 from logging.config import fileConfig
 

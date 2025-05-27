@@ -4,13 +4,13 @@ import {
   createRoutesFromElements,
   Navigate,
 } from "react-router-dom";
-import DashboardPage from "../pages/DashboardPage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import ReportPage from "../pages/ReportPage";
-import GoalsPage from "../pages/GoalsPage";
-import HistoryPage from "../pages/HistoryPage";
-import SettingsPage from "../pages/SettingsPage";
+import DashboardPage from "../pages/DashboardPage/DashboardPage.jsx";
+import LoginPage from "../pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "../pages/RegisterPage/RegisterPage.jsx";
+import ReportPage from "../pages/ReportPage/ReportPage.jsx";
+import GoalsPage from "../pages/GoalsPage/GoalsPage.jsx";
+import HistoryPage from "../pages/HistoryPage/HistoryPage.jsx";
+import SettingsPage from "../pages/SettingsPage/SettingsPage.jsx";
 
 export default function createAppRouter() {
   return createBrowserRouter(
