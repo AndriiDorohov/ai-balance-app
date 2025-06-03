@@ -21,6 +21,7 @@ export default function Header() {
         <button onClick={() => navigate("/history")}>History</button>
         <button onClick={() => navigate("/goals")}>Goals</button>
         <button onClick={() => navigate("/settings")}>Settings</button>
+        <button onClick={() => navigate("/about")}>About</button>
         <button onClick={handleLogout}>Logout</button>
       </nav>
     </header>

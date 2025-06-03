@@ -13,6 +13,7 @@ import ReportPage from "../pages/ReportPage/ReportPage";
 import GoalsPage from "../pages/GoalsPage/GoalsPage";
 import HistoryPage from "../pages/HistoryPage/HistoryPage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
+import AboutPage from "../pages/AboutPage/AboutPage";
 import MainLayout from "../layouts/MainLayout";
 
 const requireAuth = () => {
@@ -28,6 +29,7 @@ export default function createAppRouter() {
         <Route path="/" element={<Navigate to="/dashboard" />} />
 
         <Route element={<MainLayout />}>
+          <Route path="/about" element={<AboutPage />} />
           <Route
             path="/dashboard"
             element={<DashboardPage />}
