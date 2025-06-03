@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../context/auth/AuthContext";
@@ -6,9 +7,11 @@ import { updateUser, getProfile, deleteAccount } from "../../api/userService";
 import styles from "./SettingsPage.module.css";
 import WavesLottie from "../../components/WavesLottie/WavesLottie";
 import Button from "../../components/Button/Button";
+import PasswordField from "../../components/PasswordField/PasswordField";
 
 export default function SettingsPage() {
   const { user, token, setUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
@@ -70,6 +73,7 @@ export default function SettingsPage() {
     try {
       await deleteAccount(token);
       logout();
+      navigate("/login");
     } catch (err) {
       alert("Failed to delete account. Please try again later.");
     }
@@ -120,9 +124,9 @@ export default function SettingsPage() {
             className={styles.form}
             noValidate
           >
-            <div className={styles.formSection}>
+            <div className={styles.cardSection}>
               <h4 className={styles.sectionTitle}>Update Profile</h4>
-              <div className={styles.grid2col}>
+              <div className={styles.fieldGroup}>
                 <label className={styles.label}>
                   Name
                   <input
@@ -148,70 +152,55 @@ export default function SettingsPage() {
                     <p className={styles.error}>{formik.errors.email}</p>
                   )}
                 </label>
-              </div>
 
-              <label className={styles.label}>
-                Bio
-                <textarea
-                  name="bio"
-                  onChange={formik.handleChange}
-                  value={formik.values.bio}
-                  className={styles.input}
-                  rows="3"
-                />
-              </label>
+                <label className={styles.label}>
+                  Bio
+                  <textarea
+                    name="bio"
+                    onChange={formik.handleChange}
+                    value={formik.values.bio}
+                    className={styles.input}
+                    rows="3"
+                  />
+                </label>
+              </div>
             </div>
 
-            <div className={styles.formSection}>
+            <div className={styles.cardSection}>
               <h4 className={styles.sectionTitle}>Change Password</h4>
-              <div className={styles.grid2col}>
-                <label className={styles.label}>
-                  New Password
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    className={styles.input}
-                    placeholder="Leave blank to keep current"
-                    autoComplete="new-password"
-                  />
-                  {formik.touched.password && formik.errors.password && (
-                    <p className={styles.error}>{formik.errors.password}</p>
-                  )}
-                </label>
-
-                <label className={styles.label}>
-                  Confirm Password
-                  <input
-                    type="password"
-                    name="passwordConfirm"
-                    onChange={formik.handleChange}
-                    value={formik.values.passwordConfirm}
-                    className={styles.input}
-                    autoComplete="new-password"
-                  />
-                  {formik.touched.passwordConfirm &&
-                    formik.errors.passwordConfirm && (
-                      <p className={styles.error}>
-                        {formik.errors.passwordConfirm}
-                      </p>
-                    )}
-                </label>
+              <div className={styles.fieldGroup}>
+                <PasswordField
+                  label="New Password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  placeholder="Leave blank to keep current"
+                  error={formik.touched.password && formik.errors.password}
+                />
+                <PasswordField
+                  label="Confirm Password"
+                  name="passwordConfirm"
+                  value={formik.values.passwordConfirm}
+                  onChange={formik.handleChange}
+                  placeholder="Repeat new password"
+                  error={
+                    formik.touched.passwordConfirm &&
+                    formik.errors.passwordConfirm
+                  }
+                />
               </div>
+            </div>
+
+            <div className={styles.buttonWrapper}>
+              <Button
+                type="submit"
+                className="edit"
+                disabled={formik.isSubmitting || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Saving..." : "Save changes"}
+              </Button>
             </div>
           </form>
-
-          <div className={styles.buttonWrapper}>
-            <Button
-              type="submit"
-              className="edit"
-              disabled={formik.isSubmitting || !formik.isValid}
-              onClick={formik.handleSubmit}
-            >
-              {formik.isSubmitting ? "Saving..." : "Save changes"}
-            </Button>
-          </div>
 
           {message && (
             <p className={`${styles.message} ${styles.success}`}>{message}</p>

@@ -13,35 +13,6 @@
     }
 }
 
-.wrapper {
-    position: relative;
-    z-index: 1;
-}
-
-.headerBox {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 2rem 1rem 1rem;
-    background: transparent;
-    font-family: "Quicksand", "Segoe UI", sans-serif;
-}
-
-.title {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: rgba(0, 0, 0, 0.6);
-    animation: pulse 4s ease-in-out infinite;
-}
-
-.subheading {
-    font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.5);
-    font-weight: 500;
-    margin-bottom: 2rem;
-}
-
 .container {
     position: relative;
     z-index: 1;
@@ -53,6 +24,26 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(12px);
     font-family: "Quicksand", sans-serif;
+}
+
+.headerBox {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    font-family: "Quicksand", "Segoe UI", sans-serif;
+}
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.subheading {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    margin-bottom: 2rem;
 }
 
 .profileBox {
@@ -81,9 +72,9 @@
 }
 
 .form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -91,18 +82,24 @@
     margin-bottom: 2rem;
 }
 
-.grid2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+.sectionTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3f51b5;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid #e3f2fd;
+    padding-bottom: 0.5rem;
 }
 
 .label {
     display: flex;
     flex-direction: column;
-    font-weight: 600;
-    color: #333;
+    font-weight: 500;
+    color: #555;
     font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-family: "Inter", "Quicksand", sans-serif;
+    letter-spacing: 0.3px;
 }
 
 .input,
@@ -131,11 +128,10 @@
 .buttonWrapper {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .message {
-    grid-column: span 2;
     margin-top: 1.5rem;
     font-weight: 600;
     text-align: center;
@@ -154,14 +150,12 @@
 }
 
 .dangerZone {
-    margin-top: 3rem;
     padding: 2rem;
     background-color: #fff5f5;
     border: 1px solid #f8d7da;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(220, 53, 69, 0.08);
     text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 .warningText {
@@ -171,38 +165,45 @@
     font-size: 0.95rem;
 }
 
-.sectionTitle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 0.5rem 0.75rem;
-    border-left: 4px solid #3f51b5;
-    background-color: rgba(63, 81, 181, 0.05);
-    border-radius: 6px;
-    color: #3f51b5;
-}
-
 .dangerZoneTitle {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1.2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     padding: 0.5rem 0.75rem;
-    border-left: 4px solid #d32f2f;
-    background-color: #ffebee;
-    border-radius: 6px;
+    /* background-color: #ffebee; */
+    /* border-radius: 6px; */
     color: #d32f2f;
+    border-bottom: 2px solid #ffebee;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.fadeOut {
+    animation: fadeOut 0.8s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.97);
+    }
 }
 
 @media (max-width: 640px) {
-    .form,
-    .grid2col {
-        grid-template-columns: 1fr;
+    .form {
+        gap: 1.5rem;
     }
 }
 

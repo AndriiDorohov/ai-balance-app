@@ -2,9 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from app.db.session import SessionLocal
 from app.auth.dependencies import get_current_user
-from app.models.user import User
 from app.schemas.user import UserUpdate, UserResponse
 from app.core.security import get_password_hash
+import traceback
+from app.models.user import User
+from app.models.entry import Entry
+from app.models.goal import Goal
+
 
 router = APIRouter()
 
@@ -54,15 +58,22 @@ def get_current_user_info(
 ):
     return current_user
 
+
 @router.delete("/users/me", status_code=204)
 def delete_user_account(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     try:
-        db.delete(current_user)
+        user = db.query(User).filter(User.id == current_user.id).first()
+
+        db.query(Entry).filter(Entry.user_id == user.id).delete()
+        db.query(Goal).filter(Goal.user_id == user.id).delete()
+
+        db.delete(user)
         db.commit()
-    except Exception:
+
+    except Exception as e:
         db.rollback()
         raise HTTPException(
             status_code=500,

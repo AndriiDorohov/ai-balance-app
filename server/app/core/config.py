@@ -5,6 +5,14 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     DATABASE_URL: str
 
+    SMTP_SERVER: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASSWORD: str
+    FRONTEND_URL: str = "http://localhost:5173"
+
+    SECURITY_PASSWORD_SALT: str = "email-confirm"
+
     class Config:
         env_file = ".env"
 

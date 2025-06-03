@@ -65,6 +65,9 @@
 │   │   │   ├── MoodChart
 │   │   │   │   ├── MoodChart.jsx
 │   │   │   │   └── MoodChart.module.css
+│   │   │   ├── PasswordField
+│   │   │   │   ├── PasswordField.jsx
+│   │   │   │   └── PasswordField.module.css
 │   │   │   ├── PrivateRoute
 │   │   │   │   ├── PrivateRoute.jsx
 │   │   │   │   └── PrivateRoute.module.css
@@ -89,6 +92,9 @@
 │   │   │   └── TopNav.jsx
 │   │   ├── main.jsx
 │   │   ├── pages
+│   │   │   ├── AboutPage
+│   │   │   │   ├── AboutPage.jsx
+│   │   │   │   └── AboutPage.module.css
 │   │   │   ├── DashboardPage
 │   │   │   │   ├── DashboardPage.jsx
 │   │   │   │   ├── DashboardPage.module.css
@@ -112,10 +118,13 @@
 │   │   │   ├── ReportPage
 │   │   │   │   ├── ReportPage.jsx
 │   │   │   │   └── index.js
-│   │   │   └── SettingsPage
-│   │   │       ├── SettingsPage.jsx
-│   │   │       ├── SettingsPage.module.css
-│   │   │       └── index.js
+│   │   │   ├── SettingsPage
+│   │   │   │   ├── SettingsPage.jsx
+│   │   │   │   ├── SettingsPage.module.css
+│   │   │   │   └── index.js
+│   │   │   └── VerifyEmailPage
+│   │   │       ├── VerifyEmailPage.jsx
+│   │   │       └── VerifyEmailPage.module.css
 │   │   ├── router
 │   │   │   └── router.jsx
 │   │   ├── services
@@ -134,9 +143,11 @@
 │   │   ├── script.py.mako
 │   │   └── versions
 │   │       ├── 0aa16d642ba4_add_mood_category_to_entry.py
+│   │       ├── 113e16ea6699_add_is_active_field_to_user.py
 │   │       ├── 3310c612aa4d_add_goals_table.py
 │   │       ├── 35fb5cb2d701_create_entries_table.py
 │   │       ├── 3919fc2d8df1_fix_created_at_default_now.py
+│   │       ├── 489c306f6ae0_add_on_delete_cascade_to_user_id_fks.py
 │   │       ├── 4a21c6ffd8d7_add_name_and_bio_to_user.py
 │   │       ├── 4cc5124d809b_create_goals_table.py
 │   │       ├── 5c85c09c49d5_add_default_now_to_created_at.py
@@ -145,11 +156,14 @@
 │   │       ├── 9b3ef44ac03d_add_default_to_created_at.py
 │   │       ├── __pycache__
 │   │       │   ├── 0aa16d642ba4_add_mood_category_to_entry.cpython-311.pyc
+│   │       │   ├── 113e16ea6699_add_is_active_field_to_user.cpython-311.pyc
 │   │       │   ├── 3310c612aa4d_add_goals_table.cpython-311.pyc
 │   │       │   ├── 35fb5cb2d701_create_entries_table.cpython-311.pyc
 │   │       │   ├── 3919fc2d8df1_fix_created_at_default_now.cpython-311.pyc
+│   │       │   ├── 489c306f6ae0_add_on_delete_cascade_to_user_id_fks.cpython-311.pyc
 │   │       │   ├── 4a21c6ffd8d7_add_name_and_bio_to_user.cpython-311.pyc
 │   │       │   ├── 4cc5124d809b_create_goals_table.cpython-311.pyc
+│   │       │   ├── 50987b71eae1_add_is_verified_to_users.cpython-311.pyc
 │   │       │   ├── 5c85c09c49d5_add_default_now_to_created_at.cpython-311.pyc
 │   │       │   ├── 820f761f706c_add_user_id_to_entries.cpython-311.pyc
 │   │       │   ├── 82f356050428_create_entries_table.cpython-311.pyc
@@ -172,8 +186,10 @@
 │   │   ├── core
 │   │   │   ├── __pycache__
 │   │   │   │   ├── config.cpython-311.pyc
+│   │   │   │   ├── email.cpython-311.pyc
 │   │   │   │   └── security.cpython-311.pyc
 │   │   │   ├── config.py
+│   │   │   ├── email.py
 │   │   │   └── security.py
 │   │   ├── database.py
 │   │   ├── db
@@ -201,12 +217,14 @@
 │   │   │   ├── __pycache__
 │   │   │   │   ├── __init__.cpython-311.pyc
 │   │   │   │   ├── auth.cpython-311.pyc
+│   │   │   │   ├── email.cpython-311.pyc
 │   │   │   │   ├── entry.cpython-311.pyc
 │   │   │   │   ├── goals.cpython-311.pyc
 │   │   │   │   ├── gpt.cpython-311.pyc
 │   │   │   │   ├── status.cpython-311.pyc
 │   │   │   │   └── user.cpython-311.pyc
 │   │   │   ├── auth.py
+│   │   │   ├── email.py
 │   │   │   ├── entry.py
 │   │   │   ├── goals.py
 │   │   │   ├── gpt.py
@@ -216,10 +234,12 @@
 │   │   │   ├── __init__.py
 │   │   │   ├── __pycache__
 │   │   │   │   ├── __init__.cpython-311.pyc
+│   │   │   │   ├── email_request.cpython-311.pyc
 │   │   │   │   ├── entry.cpython-311.pyc
 │   │   │   │   ├── goal.cpython-311.pyc
 │   │   │   │   ├── gpt.cpython-311.pyc
 │   │   │   │   └── user.cpython-311.pyc
+│   │   │   ├── email_request.py
 │   │   │   ├── entry.py
 │   │   │   ├── goal.py
 │   │   │   ├── gpt.py
@@ -232,9 +252,11 @@
 │   │   │   └── gpt_service.py
 │   │   └── utils
 │   │       ├── __pycache__
+│   │       │   ├── email_token.cpython-311.pyc
 │   │       │   └── mood.cpython-311.pyc
+│   │       ├── email_token.py
 │   │       └── mood.py
 │   └── requirements.txt
 └── structure.txt
 
-64 directories, 174 files
+67 directories, 193 files

@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
+from sqlalchemy import Column, String, Boolean
 from sqlalchemy.orm import relationship
 from app.db.session import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -15,3 +17,4 @@ class User(Base):
 
     entries = relationship("Entry", back_populates="user", cascade="all, delete-orphan")
     goals = relationship("Goal", back_populates="user", cascade="all, delete-orphan")
+    is_verified = Column(Boolean, default=False)

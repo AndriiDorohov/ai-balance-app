@@ -22,3 +22,10 @@ export const loginUser = async (email, password) => {
 
   return res.data;
 };
+
+export const resendVerification = async (email) => {
+  const res = await axios.post(`${API_BASE_URL}/auth/resend-verification`, {
+    email,
+  });
+  return res.data;
+};

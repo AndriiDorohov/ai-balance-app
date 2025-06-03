@@ -15,6 +15,7 @@ import HistoryPage from "../pages/HistoryPage/HistoryPage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
 import AboutPage from "../pages/AboutPage/AboutPage";
 import MainLayout from "../layouts/MainLayout";
+import VerifyEmailPage from "../pages/VerifyEmailPage/VerifyEmailPage";
 
 const requireAuth = () => {
   const token = localStorage.getItem("token");
@@ -27,7 +28,6 @@ export default function createAppRouter() {
     createRoutesFromElements(
       <>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-
         <Route element={<MainLayout />}>
           <Route path="/about" element={<AboutPage />} />
           <Route
@@ -48,9 +48,9 @@ export default function createAppRouter() {
             loader={requireAuth}
           />
         </Route>
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />{" "}
       </>,
     ),
   );

@@ -3,6 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth/AuthContext";
 import { loginUser } from "../../api/authService";
 import WavesLottie from "../../components/WavesLottie/WavesLottie";
+import PasswordField from "../../components/PasswordField/PasswordField";
+import { resendVerification } from "../../api/authService";
+import toast from "react-hot-toast";
+
 import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
@@ -22,6 +26,21 @@ export default function LoginPage() {
       navigate("/dashboard");
     } catch {
       setError("Invalid email or password.");
+    }
+  };
+
+  const handleResend = async () => {
+    if (!email) {
+      setError("Please enter your email above.");
+      return;
+    }
+
+    try {
+      const { message } = await resendVerification(email);
+      toast.success(message);
+    } catch (err) {
+      const detail = err.response?.data?.detail || "Failed to resend email.";
+      toast.error(detail);
     }
   };
 
@@ -46,9 +65,7 @@ export default function LoginPage() {
 
           <label className={styles.label}>
             Password
-            <input
-              type="password"
-              className={styles.input}
+            <PasswordField
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
@@ -68,6 +85,16 @@ export default function LoginPage() {
           <Link to="/register" className={styles.link}>
             Register
           </Link>
+        </p>
+        <p className={styles.resendText}>
+          Didn’t get the email?{" "}
+          <button
+            type="button"
+            onClick={handleResend}
+            className={styles.resendLink}
+          >
+            Resend
+          </button>
         </p>
       </div>
     </div>
