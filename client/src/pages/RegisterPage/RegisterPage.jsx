@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../context/auth/AuthContext";
+import { registerUser, loginUser } from "../../api/authService";
+import WavesLottie from "../../components/WavesLottie/WavesLottie";
+import styles from "./RegisterPage.module.css";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -9,7 +11,13 @@ export default function RegisterPage() {
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { token, login } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [token, navigate]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,56 +29,72 @@ export default function RegisterPage() {
     }
 
     try {
-      await axios.post("/api/auth/register", { email, password });
-
-      const loginRes = await axios.post("/api/auth/login", { email, password });
-      login(loginRes.data.access_token);
+      await registerUser(email, password);
+      const { access_token } = await loginUser(email, password);
+      login(access_token);
       navigate("/dashboard");
-    } catch (err) {
+    } catch {
       setError("Registration failed.");
     }
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Confirm Password:
-          <input
-            type="password"
-            value={confirm}
-            required
-            onChange={(e) => setConfirm(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit">Register</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-    </div>
+    <>
+      <WavesLottie variant="default" />
+
+      <div className={styles.container}>
+        <h1 className={styles.title}>Create Account</h1>
+        <form onSubmit={handleRegister} className={styles.form}>
+          <label className={styles.label}>
+            Email
+            <input
+              type="email"
+              className={styles.input}
+              value={email}
+              required
+              placeholder="your.email@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+
+          <label className={styles.label}>
+            Password
+            <input
+              type="password"
+              className={styles.input}
+              value={password}
+              required
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+
+          <label className={styles.label}>
+            Confirm Password
+            <input
+              type="password"
+              className={styles.input}
+              value={confirm}
+              required
+              placeholder="Repeat your password"
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+          </label>
+
+          {error && <p className={styles.error}>{error}</p>}
+
+          <button type="submit" className={styles.button}>
+            Register
+          </button>
+        </form>
+
+        <p className={styles.loginText}>
+          Already have an account?{" "}
+          <Link to="/login" className={styles.loginLink}>
+            Login
+          </Link>
+        </p>
+      </div>
+    </>
   );
 }

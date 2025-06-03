@@ -1,9 +1,63 @@
 .button {
     padding: 10px 20px;
-    background-color: #4f46e5;
-    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: 600;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    opacity: 0.9;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.button:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+    color: #999;
+}
+
+.button.delete {
+    background-color: #fde2e2;
+    color: #ef5350;
+}
+
+.button.edit {
+    background-color: #e3f2fd;
+    color: #42a5f5;
+}
+
+.button.regenerate {
+    background-color: #fff8e1;
+    color: #f9a825;
+}
+
+.button.save {
+    background-color: #e8f5e9;
+    color: #66bb6a;
+}
+
+.button.cancel {
+    background-color: #f3e5f5;
+    color: #ab47bc;
+}
+
+.button.back {
+    background-color: #fce4ec;
+    color: #e91e63;
+}
+
+.button.loadMore {
+    background-color: #f0f4c3;
+    color: #827717;
 }

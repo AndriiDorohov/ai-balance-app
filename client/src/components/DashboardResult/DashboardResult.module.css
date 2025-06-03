@@ -1,0 +1,35 @@
+.dashboardResult {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 14px;
+    background: rgba(152, 251, 152, 0.3);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.6s ease forwards;
+    transition: all 0.3s ease;
+}
+
+.dashboardSectionTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #116b5e;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+.dashboardMood {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #116b5e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

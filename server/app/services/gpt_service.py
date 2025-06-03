@@ -4,10 +4,25 @@ import re
 
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
+print("GPT TOKEN (start):", settings.OPENAI_API_KEY[:10])
+
+
 def generate_summary(entry_text: str) -> dict:
     try:
+        prompt_content = (
+            f"Analyze the following journal entry and provide:\n"
+            "1. A brief summary of the text.\n"
+            "2. The mood, as one of these exact words only: Positive, Neutral, Negative.\n"
+            "3. A short recommendation based on the mood.\n\n"
+            f"Journal entry:\n\"\"\"{entry_text}\"\"\"\n\n"
+            "Return the response exactly in this format:\n"
+            "- Summary: ...\n"
+            "- Detected mood: ...\n"
+            "- Recommendation: ..."
+        )
+
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-3.5-turbo",
             messages=[
                 {
                     "role": "system",
@@ -15,13 +30,7 @@ def generate_summary(entry_text: str) -> dict:
                 },
                 {
                     "role": "user",
-                    "content": (
-                        f"Entry: {entry_text}\n\n"
-                        "Return in the format:\n"
-                        "- Summary: ...\n"
-                        "- Detected mood: ...\n"
-                        "- Recommendation: ..."
-                    )
+                    "content": prompt_content,
                 }
             ],
             temperature=0.7,
@@ -46,3 +55,31 @@ def generate_summary(entry_text: str) -> dict:
             "mood": "unknown",
             "recommendation": str(e)
         }
+
+
+
+def analyze_goal(goal_text: str) -> str:
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a motivational coach who helps people stay focused on their goals."
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Goal: {goal_text}\n\n"
+                        "Write a short motivational message (1-2 sentences) that encourages the person to pursue this goal."
+                    )
+                }
+            ],
+            temperature=0.8,
+            max_tokens=100,
+        )
+
+        return response.choices[0].message.content.strip()
+
+    except Exception as e:
+        return f"Error generating summary: {str(e)}"

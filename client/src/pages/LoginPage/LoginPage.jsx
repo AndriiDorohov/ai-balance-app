@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../context/auth/AuthContext";
+import { loginUser } from "../../api/authService";
+import WavesLottie from "../../components/WavesLottie/WavesLottie";
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,44 +17,59 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await axios.post("/api/auth/login", { email, password });
-      login(response.data.access_token);
+      const { access_token } = await loginUser(email, password);
+      login(access_token);
       navigate("/dashboard");
-    } catch (err) {
+    } catch {
       setError("Invalid email or password.");
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </form>
-      <p>
-        Don’t have an account? <Link to="/register">Register</Link>
-      </p>
+    <div className={styles.wrapper}>
+      <WavesLottie variant="default" />
+
+      <div className={styles.container}>
+        <h1 className={styles.title}>Welcome Back!</h1>
+        <form onSubmit={handleLogin} className={styles.form}>
+          <label className={styles.label}>
+            Email
+            <input
+              type="email"
+              className={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your.email@example.com"
+              required
+            />
+          </label>
+
+          <label className={styles.label}>
+            Password
+            <input
+              type="password"
+              className={styles.input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </label>
+
+          {error && <p className={styles.error}>{error}</p>}
+
+          <button type="submit" className={styles.button}>
+            Log In
+          </button>
+        </form>
+
+        <p className={styles.registerText}>
+          Don’t have an account?{" "}
+          <Link to="/register" className={styles.link}>
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

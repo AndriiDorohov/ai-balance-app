@@ -6,28 +6,28 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
     () => localStorage.getItem("token") || null,
   );
+  const [user, setUser] = useState(null);
 
   const isAuthenticated = !!token;
 
-  const login = (newToken) => {
+  const login = (newToken, userData) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
+    setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    setUser(null);
   };
 
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    if (savedToken && !token) {
-      setToken(savedToken);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ token, user, setUser, isAuthenticated, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

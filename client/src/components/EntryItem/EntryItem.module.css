@@ -1,0 +1,65 @@
+.item {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.saved {
+    color: #22c55e;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.positive {
+    background-color: #e6ffed;
+}
+
+.neutral {
+    background-color: #fffbea;
+}
+
+.negative {
+    background-color: #ffecec;
+}
+
+.listItem {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 2rem;
+}
+
+.cardWrapper {
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
