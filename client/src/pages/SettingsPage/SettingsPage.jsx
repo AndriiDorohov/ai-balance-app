@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../context/auth/AuthContext";
-import { updateUser, getProfile } from "../../api/userService";
+import { updateUser, getProfile, deleteAccount } from "../../api/userService";
 import styles from "./SettingsPage.module.css";
 import WavesLottie from "../../components/WavesLottie/WavesLottie";
 import Button from "../../components/Button/Button";
 
 export default function SettingsPage() {
-  const { user, token, setUser } = useAuth();
+  const { user, token, setUser, logout } = useAuth();
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
@@ -60,6 +60,20 @@ export default function SettingsPage() {
       }
     },
   });
+
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to permanently delete your account and all your entries? This cannot be undone.",
+    );
+    if (!confirmed) return;
+
+    try {
+      await deleteAccount(token);
+      logout();
+    } catch (err) {
+      alert("Failed to delete account. Please try again later.");
+    }
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -205,6 +219,22 @@ export default function SettingsPage() {
           {error && (
             <p className={`${styles.message} ${styles.error}`}>{error}</p>
           )}
+
+          <div className={styles.dangerZone}>
+            <h4 className={styles.dangerZoneTitle}>Danger Zone</h4>
+            <p className={styles.warningText}>
+              Once deleted, your account and all data cannot be recovered.
+            </p>
+            <div className={styles.buttonWrapper}>
+              <Button
+                type="button"
+                className="deleteAccount"
+                onClick={handleDeleteAccount}
+              >
+                Delete Account Permanently
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </>

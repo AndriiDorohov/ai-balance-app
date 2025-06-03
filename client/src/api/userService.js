@@ -18,3 +18,11 @@ export const getProfile = async (token) => {
   });
   return res.data;
 };
+
+export const deleteAccount = async (token) => {
+  await axios.delete(`${API_BASE_URL}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

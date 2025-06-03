@@ -61,3 +61,16 @@
     background-color: #f0f4c3;
     color: #827717;
 }
+
+.button.deleteAccount {
+    background-color: transparent;
+    color: #999;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.button.deleteAccount:hover {
+    color: #d11a2a;
+    border-color: #d11a2a;
+    background-color: #fff0f0;
+}

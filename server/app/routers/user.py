@@ -34,20 +34,18 @@ def update_user(
                 detail="This email is already in use by another account."
             )
 
-    user = db.query(User).filter(User.id == current_user.id).first()
-
     if user_update.password:
-        user.hashed_password = get_password_hash(user_update.password)
+        current_user.hashed_password = get_password_hash(user_update.password)
     if user_update.email:
-        user.email = user_update.email
+        current_user.email = user_update.email
     if user_update.name is not None:
-        user.name = user_update.name
+        current_user.name = user_update.name
     if user_update.bio is not None:
-        user.bio = user_update.bio
+        current_user.bio = user_update.bio
 
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(current_user)
+    return current_user
 
 @router.get("/user/me", response_model=UserResponse)
 def get_current_user_info(
@@ -55,3 +53,18 @@ def get_current_user_info(
     current_user: User = Depends(get_current_user),
 ):
     return current_user
+
+@router.delete("/users/me", status_code=204)
+def delete_user_account(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    try:
+        db.delete(current_user)
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to delete account. Please try again later.",
+        )
