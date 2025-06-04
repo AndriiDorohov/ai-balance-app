@@ -6,6 +6,7 @@ export default function DashboardForm({
   handleSubmit,
   loading,
   isSubmitting,
+  entryExists,
 }) {
   return (
     <div className={styles.dashboardFormWrapper}>
@@ -15,7 +16,7 @@ export default function DashboardForm({
           onChange={(e) => setEntryText(e.target.value)}
           placeholder="Write about your day..."
           required
-          disabled={loading || isSubmitting}
+          disabled={loading || isSubmitting || entryExists}
           className={styles.dashboardTextarea}
         />
 
@@ -26,10 +27,13 @@ export default function DashboardForm({
         <button
           type="submit"
           className={styles.dashboardButton}
-          disabled={loading || isSubmitting}
-          onClick={() => console.log("Submit button clicked")}
+          disabled={loading || isSubmitting || entryExists}
         >
-          {loading ? "Analyzing..." : "Get AI Summary"}
+          {entryExists
+            ? "Already submitted"
+            : loading
+              ? "Analyzing..."
+              : "Get AI Summary"}
         </button>
       </form>
     </div>

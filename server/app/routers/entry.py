@@ -22,7 +22,16 @@ def get_db():
 
 @router.post("/entries", response_model=EntryResponse)
 def create_entry(entry: EntryCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    print(f"Creating entry for user {current_user.id} with text: {entry.entry_text}")
+    today = datetime.utcnow().date()
+    existing_entry = db.query(Entry).filter(
+        Entry.user_id == current_user.id,
+        Entry.created_at >= datetime.combine(today, time.min),
+        Entry.created_at <= datetime.combine(today, time.max)
+    ).first()
+
+    if existing_entry:
+        raise HTTPException(status_code=400, detail="An entry for today already exists.")
+
     mood_category = extract_category(entry.mood) if entry.mood else "neutral"
     new_entry = Entry(
         entry_text=entry.entry_text,

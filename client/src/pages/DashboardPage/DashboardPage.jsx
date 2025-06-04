@@ -24,6 +24,8 @@ export default function DashboardPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const resultRef = useRef(null);
+  const [entryExists, setEntryExists] = useState(false);
+  const hasShownToast = useRef(false);
 
   const { token, user } = useAuth();
   const location = useLocation();
@@ -32,12 +34,24 @@ export default function DashboardPage() {
     const fetchTodayEntry = async () => {
       try {
         const today = await getTodayEntry(token);
-        if (today.summary || today.mood || today.recommendation) {
-          setEntryText("");
+        if (today) {
+          setEntryExists(true);
+          setEntryText(today.entry_text || "");
+          if (!hasShownToast.current) {
+            toast.error(
+              "You have already submitted today's entry. Try again tomorrow 🕓",
+              {
+                position: "top-right",
+              },
+            );
+            hasShownToast.current = true;
+          }
         } else {
-          setEntryText(today.entry_text);
+          setEntryExists(false);
+          setEntryText("");
         }
       } catch (err) {
+        setEntryExists(false);
         setEntryText("");
       }
     };
@@ -53,6 +67,10 @@ export default function DashboardPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (entryExists) {
+      toast.error("Only one entry per day is allowed.");
+      return;
+    }
 
     setIsSubmitting(true);
     setLoading(true);
@@ -63,6 +81,7 @@ export default function DashboardPage() {
       const data = await fetchSummary(entryText, token);
       setResult(data);
       setEntryText("");
+      setEntryExists(true);
 
       setTimeout(() => {
         resultRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -93,6 +112,7 @@ export default function DashboardPage() {
           handleSubmit={handleSubmit}
           loading={loading}
           isSubmitting={isSubmitting}
+          entryExists={entryExists}
         />
 
         {loading && <Spinner />}
