@@ -53,6 +53,9 @@
 │   │   │   ├── ExpandableText
 │   │   │   │   ├── ExpandableText.jsx
 │   │   │   │   └── ExpandableText.module.css
+│   │   │   ├── Footer
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── Footer.module.css
 │   │   │   ├── Header
 │   │   │   │   ├── Header.jsx
 │   │   │   │   ├── Header.module.css
@@ -90,6 +93,7 @@
 │   │   ├── layouts
 │   │   │   ├── AuthLayout.jsx
 │   │   │   ├── MainLayout.jsx
+│   │   │   ├── MainLayout.module.css
 │   │   │   └── TopNav.jsx
 │   │   ├── main.jsx
 │   │   ├── pages
@@ -260,4 +264,4 @@
 │   └── requirements.txt
 └── structure.txt
 
-67 directories, 194 files
+68 directories, 197 files

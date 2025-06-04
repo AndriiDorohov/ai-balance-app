@@ -73,6 +73,19 @@ It helps users reflect on their day, track emotional states, set goals, and rece
 - Avatar-based visual assistant
 
 ---
+### 🔗 Web3 Integration (Optional Module)
+
+AI Balance also supports optional Web3 features for users who want to store important emotional entries in a decentralized way or receive NFT rewards for personal achievements.
+
+- 🔐 Login with MetaMask (alternative to email authentication)
+- 🎖️ NFT badges for emotional streaks, goal completions, or mood breakthroughs
+- 🌍 Store meaningful entries permanently on IPFS
+- 🧬 Public ENS profile with emotional progress and achievements
+- 🗳 DAO-style voting for future feature development (in progress)
+
+> Web3 functionality is entirely optional. It is being added gradually and is not required to use the core app.
+
+---
 
 ## 📂 Project Structure
 
