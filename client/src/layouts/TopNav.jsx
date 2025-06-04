@@ -16,6 +16,7 @@ export default function TopNav() {
         <li onClick={() => navigate("/history")}>History</li>
         <li onClick={() => navigate("/goals")}>Goals</li>
         <li onClick={() => navigate("/settings")}>Settings</li>
+        <li onClick={() => navigate("/web3")}>Web3</li>
         <li onClick={logout}>Logout</li>
       </ul>
     </nav>

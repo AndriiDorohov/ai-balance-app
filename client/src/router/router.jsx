@@ -16,6 +16,7 @@ import SettingsPage from "../pages/SettingsPage/SettingsPage";
 import AboutPage from "../pages/AboutPage/AboutPage";
 import MainLayout from "../layouts/MainLayout";
 import VerifyEmailPage from "../pages/VerifyEmailPage/VerifyEmailPage";
+import Web3Page from "../pages/Web3Page/Web3Page";
 
 const requireAuth = () => {
   const token = localStorage.getItem("token");
@@ -47,6 +48,7 @@ export default function createAppRouter() {
             element={<SettingsPage />}
             loader={requireAuth}
           />
+          <Route path="/web3" element={<Web3Page />} loader={requireAuth} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
