@@ -26,6 +26,8 @@ server/*.sqlite3
 server/*.db
 .python-version
 
+# === PostgreSQL ===
+# server/*.sql
 
 # === Environment (global) ===
 .env
