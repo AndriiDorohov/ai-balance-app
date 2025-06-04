@@ -17,20 +17,6 @@
     font-family: "Segoe UI", sans-serif;
     transition: all 0.3s ease;
 }
-
-.shrink {
-    padding: 0.1rem 1rem;
-    background-color: #ebe4ff;
-}
-
-.shrink .logo {
-    font-size: 1.2rem;
-}
-
-.shrink .nav button {
-    font-size: 0.9rem;
-}
-
 .logo {
     font-family: "Rubik", sans-serif;
     font-size: 1.6rem;
@@ -113,4 +99,17 @@
 
 .accountBtn:hover {
     color: #9f7aea;
+}
+
+.shrink {
+    padding: 0.1rem 1rem;
+    background-color: #ebe4ff;
+}
+
+.shrink .logo {
+    font-size: 1.2rem;
+}
+
+.shrink .nav button {
+    font-size: 0.9rem;
 }

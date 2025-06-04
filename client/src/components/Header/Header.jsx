@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/AuthContext";
 import { useWeb3 } from "../../web3/context/Web3Context";
 import styles from "./Header.module.css";
@@ -9,6 +10,24 @@ export default function Header() {
   const { logout } = useAuth();
   const { account, balance } = useWeb3();
 
+  const [shrink, setShrink] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShrink(true);
+      } else {
+        setShrink(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const copyAddress = () => {
     if (account) {
       navigator.clipboard.writeText(account);
@@ -17,7 +36,7 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <div className={styles.logo} onClick={() => navigate("/dashboard")}>
         AI Balance
       </div>
