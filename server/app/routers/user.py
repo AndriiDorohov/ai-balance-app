@@ -25,31 +25,44 @@ def update_user(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if user_update.email:
-        existing_user = (
-            db.query(User)
-            .filter(User.email == user_update.email)
-            .filter(User.id != current_user.id)
-            .first()
-        )
-        if existing_user:
-            raise HTTPException(
-                status_code=400,
-                detail="This email is already in use by another account."
+    try:
+        user = db.query(User).filter(User.id == current_user.id).first()
+
+        if user_update.email:
+            existing_user = (
+                db.query(User)
+                .filter(User.email == user_update.email)
+                .filter(User.id != user.id)
+                .first()
             )
+            if existing_user:
+                raise HTTPException(
+                    status_code=400,
+                    detail="This email is already in use by another account."
+                )
 
-    if user_update.password:
-        current_user.hashed_password = get_password_hash(user_update.password)
-    if user_update.email:
-        current_user.email = user_update.email
-    if user_update.name is not None:
-        current_user.name = user_update.name
-    if user_update.bio is not None:
-        current_user.bio = user_update.bio
+        if user_update.password:
+            user.hashed_password = get_password_hash(user_update.password)
+        if user_update.email:
+            user.email = user_update.email
+        if user_update.name is not None:
+            user.name = user_update.name
+        if user_update.bio is not None:
+            user.bio = user_update.bio
 
-    db.commit()
-    db.refresh(current_user)
-    return current_user
+        db.commit()
+        db.refresh(user)
+        return user
+
+    except Exception as e:
+        import traceback
+        print("🚨 Update user failed:", e)
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to update profile"
+        )
+
 
 @router.get("/user/me", response_model=UserResponse)
 def get_current_user_info(

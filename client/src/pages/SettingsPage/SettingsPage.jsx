@@ -115,7 +115,13 @@ export default function SettingsPage() {
               {new Date(user?.created_at).toLocaleDateString()}
             </p>
             <p>
+              <strong>Name:</strong> {user?.name || "—"}
+            </p>
+            <p>
               <strong>Email:</strong> {user?.email}
+            </p>
+            <p>
+              <strong>Bio:</strong> {user?.bio || "—"}
             </p>
           </div>
 
