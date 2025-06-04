@@ -100,3 +100,17 @@
 .walletBtn:hover {
     background: #ebe4ff;
 }
+.accountBtn {
+    background: none;
+    border: none;
+    color: #7f5af0;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 1rem;
+    font-family: monospace;
+    transition: color 0.3s ease;
+}
+
+.accountBtn:hover {
+    color: #9f7aea;
+}

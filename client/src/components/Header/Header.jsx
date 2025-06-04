@@ -1,60 +1,47 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth/AuthContext";
 import { useWeb3 } from "../../web3/context/Web3Context";
-import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
+import toast from "react-hot-toast";
 
 export default function Header() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { logout } = useAuth();
-  const { account, connectWallet } = useWeb3();
-  const [scrolled, setScrolled] = useState(false);
+  const { account, balance } = useWeb3();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
+  const copyAddress = () => {
+    if (account) {
+      navigator.clipboard.writeText(account);
+      toast.success("Address copied to clipboard!");
+    }
   };
 
-  const isActive = (path) => location.pathname === path;
-
   return (
-    <header className={`${styles.header} ${scrolled ? styles.shrink : ""}`}>
+    <header className={styles.header}>
       <div className={styles.logo} onClick={() => navigate("/dashboard")}>
         AI Balance
       </div>
       <nav className={styles.nav}>
-        {[
-          { label: "Dashboard", path: "/dashboard" },
-          { label: "History", path: "/history" },
-          { label: "Goals", path: "/goals" },
-          { label: "Settings", path: "/settings" },
-          { label: "About", path: "/about" },
-        ].map(({ label, path }) => (
+        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+        <button onClick={() => navigate("/history")}>History</button>
+        <button onClick={() => navigate("/goals")}>Goals</button>
+        <button onClick={() => navigate("/settings")}>Settings</button>
+        <button onClick={() => navigate("/about")}>About</button>
+        <button onClick={() => navigate("/web3")}>Web3</button>
+        {account && (
           <button
-            key={path}
-            onClick={() => navigate(path)}
-            className={isActive(path) ? styles.active : ""}
+            onClick={() =>
+              window.open(`https://etherscan.io/address/${account}`, "_blank")
+            }
+            title="View on Etherscan"
+            className={styles.accountBtn}
+            onDoubleClick={copyAddress}
           >
-            {label}
-          </button>
-        ))}
-        {account ? (
-          <span className={styles.account}>
-            🦊 {account.slice(0, 6)}...{account.slice(-4)}
-          </span>
-        ) : (
-          <button onClick={connectWallet} className={styles.walletBtn}>
-            Connect Wallet
+            🦊 {account.slice(0, 6)}...{account.slice(-4)} (
+            {parseFloat(balance).toFixed(4)} ETH)
           </button>
         )}
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={logout}>Logout</button>
       </nav>
     </header>
   );

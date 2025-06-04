@@ -5,6 +5,8 @@ export const getNFTsForAddress = async (address) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
+
+    console.log("NFT data for address:", address, data);
     return data.ownedNfts || [];
   } catch (err) {
     console.error("Failed to fetch NFTs", err);
