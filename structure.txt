@@ -1,4 +1,5 @@
 .
+├── LICENSE
 ├── README.md
 ├── client
 │   ├── eslint.config.js
@@ -259,4 +260,4 @@
 │   └── requirements.txt
 └── structure.txt
 
-67 directories, 193 files
+67 directories, 194 files

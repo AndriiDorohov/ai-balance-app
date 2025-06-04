@@ -1,17 +1,29 @@
 .header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 720px;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2rem;
     background-color: #f3f0ff;
     color: #7f5af0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 16px;
     font-family: "Segoe UI", sans-serif;
-    max-width: 720px;
-    margin: 1rem auto;
-    z-index: 10;
-    position: relative;
+    transition: all 0.3s ease;
+}
+
+.shrink {
+    padding: 0.5rem 1.2rem;
+    max-width: 100%;
+    border-radius: 0;
+    background-color: #ebe4ff;
 }
 
 .logo {
@@ -22,6 +34,10 @@
     text-shadow: 0 0 5px rgba(127, 90, 240, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
+}
+
+.shrink .logo {
+    font-size: 1.3rem;
 }
 
 .logo:hover {

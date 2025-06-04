@@ -3,3 +3,6 @@ body {
   /* font-family: "Caveat", cursive; */
   font-family: system-ui, sans-serif;
 }
+main {
+  margin-top: 50px;
+}

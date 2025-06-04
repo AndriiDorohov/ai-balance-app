@@ -1,10 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth/AuthContext";
+import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -12,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.shrink : ""}`}>
       <div className={styles.logo} onClick={() => navigate("/dashboard")}>
         AI Balance
       </div>

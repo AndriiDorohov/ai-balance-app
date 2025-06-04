@@ -1,4 +1,5 @@
 import React from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import WavesLottie from "../../components/WavesLottie/WavesLottie";
 import styles from "./AboutPage.module.css";
 
@@ -45,11 +46,48 @@ export default function AboutPage() {
         </div>
 
         <div className={styles.section}>
-          <h3>Team Project</h3>
+          <h3>Meet the Developers</h3>
           <p>
-            This application was developed by a passionate team of developers as
-            a collaborative project to combine wellness, AI, and thoughtful UX
-            into one meaningful experience.
+            <strong>Andrii Dorokhov</strong> – Fullstack Developer
+            <br />
+            <a
+              href="https://github.com/AndriiDorohov/ai-balance-app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+            >
+              <FaGithub /> GitHub
+            </a>{" "}
+            |{" "}
+            <a
+              href="https://linkedin.com/in/andriidorokhov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+            >
+              <FaLinkedin /> LinkedIn
+            </a>
+          </p>
+          <p>
+            <strong>Vlad Skvortsov</strong> – DevOps Engineer
+            <br />
+            <a
+              href="https://github.com/vladskvortsov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+            >
+              <FaGithub /> GitHub
+            </a>{" "}
+            |{" "}
+            <a
+              href="https://www.linkedin.com/in/vlad-skvortsov-354046245/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+            >
+              <FaLinkedin /> LinkedIn
+            </a>
           </p>
         </div>
       </div>

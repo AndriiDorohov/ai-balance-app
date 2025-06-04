@@ -63,6 +63,20 @@
     color: #444;
 }
 
+.iconLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.2s ease;
+}
+
+.iconLink:hover {
+    color: #0077b5;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

@@ -32,15 +32,12 @@ export default function DashboardPage() {
     const fetchTodayEntry = async () => {
       try {
         const today = await getTodayEntry(token);
-        console.log("✅ Fetched today's entry:", today);
-
         if (today.summary || today.mood || today.recommendation) {
           setEntryText("");
         } else {
           setEntryText(today.entry_text);
         }
       } catch (err) {
-        console.log("ℹ️ No entry for today");
         setEntryText("");
       }
     };
@@ -76,7 +73,6 @@ export default function DashboardPage() {
         position: "top-right",
       });
     } catch (err) {
-      console.error("❌ Error in handleSubmit:", err);
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -87,7 +83,7 @@ export default function DashboardPage() {
   return (
     <>
       <WavesLottie variant="default" />
-      <BlurOverlay />
+      {/* <BlurOverlay /> */}
       <div className={styles.dashboardContainer}>
         <DashboardHeader username={user?.username} />
 

@@ -1,3 +1,9 @@
+## License
+
+Copyright © 2025 Andrii Dorokhov  
+This project is licensed under the MIT License.
+
+
 # AI Balance — Your Mood & Productivity Assistant
 
 **AI Balance** is a full-stack productivity and mood-tracking app powered by OpenAI GPT.  
@@ -73,130 +79,197 @@ It helps users reflect on their day, track emotional states, set goals, and rece
 
 (client/src/)
 ```plaintext
-src/
-├── components/
-│   ├── App/
-│   │   ├── App.jsx
-│   │   └── index.js
-│   ├── Button/
-│   │   ├── Button.jsx
-│   │   ├── Button.module.css
-│   │   └── index.js
-│   ├── Header/
-│   │   ├── Header.jsx
-│   │   ├── Header.module.css
-│   │   └── index.js
-│   ├── Input/
-│   │   ├── Input.jsx
-│   │   ├── Input.module.css
-│   │   └── index.js
-│   ├── Modal/
-│   │   ├── Modal.jsx
-│   │   ├── Modal.module.css
-│   │   └── index.js
-│   ├── Sidebar/
-│   │   ├── Sidebar.jsx
-│   │   ├── Sidebar.module.css
-│   │   └── index.js
-│   ├── Textarea/
-│   │   ├── Textarea.jsx
-│   │   ├── Textarea.module.css
-│   │   └── index.js
-│   └── ThemeToggle/
-│       ├── ThemeToggle.jsx
-│       ├── ThemeToggle.module.css
-│       └── index.js
-├── pages/
-│   ├── DashboardPage/
-│   │   ├── DashboardPage.jsx
-│   │   └── index.js
-│   ├── GoalsPage/
-│   │   ├── GoalsPage.jsx
-│   │   └── index.js
-│   ├── HistoryPage/
-│   │   ├── HistoryPage.jsx
-│   │   └── index.js
-│   ├── LoginPage/
-│   │   ├── LoginPage.jsx
-│   │   └── index.js
-│   ├── RegisterPage/
-│   │   ├── RegisterPage.jsx
-│   │   └── index.js
-│   ├── ReportPage/
-│   │   ├── ReportPage.jsx
-│   │   └── index.js
-│   └── SettingsPage/
-│       ├── SettingsPage.jsx
-│       └── index.js
-├── features/
-│   ├── ai/
-│   │   ├── AIResponseBlock.jsx
-│   │   └── index.js
-│   ├── entries/
-│   │   ├── EntryForm.jsx
-│   │   ├── HistoryTable.jsx
-│   │   └── index.js
-│   ├── goals/
-│   │   ├── GoalForm.jsx
-│   │   ├── GoalList.jsx
-│   │   └── index.js
-│   └── mood/
-│       ├── MoodSelector.jsx
-│       └── index.js
-├── layouts/
-│   ├── AuthLayout.jsx
-│   └── MainLayout.jsx
-├── api/
-│   ├── authService.js
-│   ├── entryService.js
-│   ├── goalService.js
-│   └── gptService.js
-├── services/
-│   └── config.js
-├── store/
-│   └── (...userStore.js, entryStore.js...)
-├── router/
-│   └── router.jsx
-├── utils/
-│   ├── formatDate.js
-│   └── getMoodColor.js
-├── constants/
-│   └── index.js
-├── main.jsx
-├── index.css
+.
+├── LICENSE
+├── README.md
+├── client
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── api
+│   │   │   ├── authService.js
+│   │   │   ├── config.js
+│   │   │   ├── entryService.js
+│   │   │   ├── goalService.js
+│   │   │   ├── gptService.js
+│   │   │   └── userService.js
+│   │   ├── assets
+│   │   │   └── animations
+│   │   │       ├── waves.json
+│   │   │       ├── waves_blue.json
+│   │   │       └── waves_lavanda.json
+│   │   ├── components
+│   │   │   ├── App
+│   │   │   │   ├── App.jsx
+│   │   │   │   └── index.js
+│   │   │   ├── BlurOverlay
+│   │   │   │   ├── BlurOverlay.jsx
+│   │   │   │   └── BlurOverlay.module.css
+│   │   │   ├── Button
+│   │   │   │   ├── Button.jsx
+│   │   │   │   ├── Button.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── DashboardForm
+│   │   │   │   ├── DashboardForm.jsx
+│   │   │   │   └── DashboardForm.module.css
+│   │   │   ├── DashboardHeader
+│   │   │   │   ├── DashboardHeader.jsx
+│   │   │   │   └── DashboardHeader.module.css
+│   │   │   ├── DashboardLoader
+│   │   │   │   ├── DashboardLoader.jsx
+│   │   │   │   └── DashboardLoader.module.css
+│   │   │   ├── DashboardResult
+│   │   │   │   ├── DashboardResult.jsx
+│   │   │   │   └── DashboardResult.module.css
+│   │   │   ├── EntryItem
+│   │   │   │   ├── EntryItem.jsx
+│   │   │   │   └── EntryItem.module.css
+│   │   │   ├── EntryList
+│   │   │   │   ├── EntryList.jsx
+│   │   │   │   └── EntryList.module.css
+│   │   │   ├── ExpandableText
+│   │   │   │   ├── ExpandableText.jsx
+│   │   │   │   └── ExpandableText.module.css
+│   │   │   ├── Header
+│   │   │   │   ├── Header.jsx
+│   │   │   │   ├── Header.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── HistoryFilters
+│   │   │   │   ├── HistoryFilters.jsx
+│   │   │   │   └── HistoryFilters.module.css
+│   │   │   ├── LogoutButton
+│   │   │   │   ├── LogoutButton.jsx
+│   │   │   │   └── LogoutButton.module.css
+│   │   │   ├── MoodChart
+│   │   │   │   ├── MoodChart.jsx
+│   │   │   │   └── MoodChart.module.css
+│   │   │   ├── PasswordField
+│   │   │   │   ├── PasswordField.jsx
+│   │   │   │   └── PasswordField.module.css
+│   │   │   ├── PrivateRoute
+│   │   │   │   ├── PrivateRoute.jsx
+│   │   │   │   └── PrivateRoute.module.css
+│   │   │   ├── Spinner
+│   │   │   │   ├── Spinner.jsx
+│   │   │   │   └── Spinner.module.css
+│   │   │   ├── Textarea
+│   │   │   │   ├── Textarea.jsx
+│   │   │   │   └── index.js
+│   │   │   └── WavesLottie
+│   │   │       ├── WavesLottie.jsx
+│   │   │       └── WavesLottie.module.css
+│   │   ├── context
+│   │   │   └── auth
+│   │   │       └── AuthContext.jsx
+│   │   ├── hooks
+│   │   │   └── useEntries.js
+│   │   ├── index.css
+│   │   ├── layouts
+│   │   │   ├── AuthLayout.jsx
+│   │   │   ├── MainLayout.jsx
+│   │   │   └── TopNav.jsx
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── AboutPage
+│   │   │   │   ├── AboutPage.jsx
+│   │   │   │   └── AboutPage.module.css
+│   │   │   ├── DashboardPage
+│   │   │   │   ├── DashboardPage.jsx
+│   │   │   │   ├── DashboardPage.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── GoalsPage
+│   │   │   │   ├── GoalsPage.jsx
+│   │   │   │   ├── GoalsPage.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── HistoryPage
+│   │   │   │   ├── HistoryPage.jsx
+│   │   │   │   ├── HistoryPage.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── LoginPage
+│   │   │   │   ├── LoginPage.jsx
+│   │   │   │   ├── LoginPage.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── RegisterPage
+│   │   │   │   ├── RegisterPage.jsx
+│   │   │   │   ├── RegisterPage.module.css
+│   │   │   │   └── index.js
+│   │   │   ├── ReportPage
+│   │   │   │   ├── ReportPage.jsx
+│   │   │   │   └── index.js
+│   │   │   ├── SettingsPage
+│   │   │   │   ├── SettingsPage.jsx
+│   │   │   │   ├── SettingsPage.module.css
+│   │   │   │   └── index.js
+│   │   │   └── VerifyEmailPage
+│   │   │       ├── VerifyEmailPage.jsx
+│   │   │       └── VerifyEmailPage.module.css
+│   │   ├── router
+│   │   │   └── router.jsx
+│   │   ├── services
+│   │   │   ├── authService.js
+│   │   │   ├── axios.js
+│   │   │   └── config.js
+│   │   └── utils
+│   │       └── moodUtils.js
+│   └── vite.config.js
+├── server
+│   ├── alembic
+│   │   ├── README
+│   │   ├── env.py
+│   │   ├── script.py.mako
+│   │   └── versions
+│   ├── alembic.ini
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── auth
+│   │   │   └── dependencies.py
+│   │   ├── core
+│   │   │   ├── config.py
+│   │   │   ├── email.py
+│   │   │   └── security.py
+│   │   ├── database.py
+│   │   ├── db
+│   │   │   ├── base.py
+│   │   │   ├── base_class.py
+│   │   │   ├── init_db.py
+│   │   │   └── session.py
+│   │   ├── main.py
+│   │   ├── models
+│   │   │   ├── __init__.py
+│   │   │   ├── entry.py
+│   │   │   ├── goal.py
+│   │   │   └── user.py
+│   │   ├── routers
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py
+│   │   │   ├── email.py
+│   │   │   ├── entry.py
+│   │   │   ├── goals.py
+│   │   │   ├── gpt.py
+│   │   │   ├── status.py
+│   │   │   └── user.py
+│   │   ├── schemas
+│   │   │   ├── __init__.py
+│   │   │   ├── email_request.py
+│   │   │   ├── entry.py
+│   │   │   ├── goal.py
+│   │   │   ├── gpt.py
+│   │   │   └── user.py
+│   │   ├── services
+│   │   │   ├── __init__.py
+│   │   │   └── gpt_service.py
+│   │   └── utils
+│   │       ├── email_token.py
+│   │       └── mood.py
+│   └── requirements.txt
+└── structure.txt
 
-```
+67 directories, 194 files
 
-(server/)
-```plaintext
-server/
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── user.py
-│   ├── schemas/
-│   │   ├── __init__.py
-│   │   └── entry.py
-│   ├── routers/
-│   │   ├── __init__.py
-│   │   ├── auth.py
-│   │   ├── entries.py
-│   │   ├── goals.py
-│   │   └── gpt.py
-│   ├── services/
-│   │   ├── __init__.py
-│   │   └── gpt_service.py
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── config.py
-│   │   └── security.py
-│   └── database.py
-├── requirements.txt
-├── .env
-├── Dockerfile
-└── alembic/
 
 ```
 
