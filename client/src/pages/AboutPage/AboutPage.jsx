@@ -46,6 +46,16 @@ export default function AboutPage() {
             trends and understand your emotional journey better.
           </p>
         </div>
+        <div className={styles.section}>
+          <h3>Explore Web3 Integration</h3>
+          <p>
+            AI Balance is also embracing the future of technology with Web3
+            features. By connecting your crypto wallet, you can view your ETH
+            balance and NFT collections right within your dashboard. It’s a step
+            towards merging emotional well-being with ownership and digital
+            identity.
+          </p>
+        </div>
 
         <div className={styles.section}>
           <h3>Meet the Developers</h3>

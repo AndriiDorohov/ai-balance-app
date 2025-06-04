@@ -3,7 +3,8 @@ client/node_modules/
 client/dist/
 client/.vite/
 client/.env
-client/.env.*.local
+client/.env.*
+!client/.env.example
 client/.DS_Store
 client/.next/
 client/.cache/
@@ -15,6 +16,7 @@ client/pnpm-lock.yaml
 server/venv/
 server/.env
 server/.env.*
+!server/.env.example
 server/__pycache__/
 server/.mypy_cache/
 server/.pytest_cache/
@@ -22,6 +24,13 @@ server/.vscode/
 server/.idea/
 server/*.sqlite3
 server/*.db
+.python-version
+
+
+# === Environment (global) ===
+.env
+.env.*
+!.env.example
 
 # === Logs ===
 *.log
@@ -58,16 +67,6 @@ ipython_config.py
 .pybuilder/
 target/
 cython_debug/
-
-# === Environment files ===
-.env
-.env.*
-.venv/
-venv/
-env/
-ENV/
-env.bak/
-venv.bak/
 
 # === Misc ===
 *.tgz
