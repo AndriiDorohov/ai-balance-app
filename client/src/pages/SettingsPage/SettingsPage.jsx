@@ -97,137 +97,139 @@ export default function SettingsPage() {
   return (
     <>
       <WavesLottie variant="blue" />
-      <div className={styles.headerBox}>
-        <h1 className={styles.title}>Settings ⚙️</h1>
-        <p className={styles.subheading}>
-          Manage your account and personal info.
-        </p>
-      </div>
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <div className={styles.profileCard}>
-            <h3>Basic Info</h3>
-            <p>
-              <strong>User ID:</strong> {user?.id}
-            </p>
-            <p>
-              <strong>Joined:</strong>{" "}
-              {new Date(user?.created_at).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>Name:</strong> {user?.name || "—"}
-            </p>
-            <p>
-              <strong>Email:</strong> {user?.email}
-            </p>
-            <p>
-              <strong>Bio:</strong> {user?.bio || "—"}
-            </p>
-          </div>
+      <div className={styles.container}>
+        <div className={styles.headerBox}>
+          <h1 className={styles.title}>Settings ⚙️</h1>
+          <p className={styles.subheading}>
+            Manage your account and personal info.
+          </p>
+        </div>
+        <div className={styles.wrapper}>
+          <div className={styles.card}>
+            <div className={styles.profileCard}>
+              <h3>Basic Info</h3>
+              <p>
+                <strong>User ID:</strong> {user?.id}
+              </p>
+              <p>
+                <strong>Joined:</strong>{" "}
+                {new Date(user?.created_at).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Name:</strong> {user?.name || "—"}
+              </p>
+              <p>
+                <strong>Email:</strong> {user?.email}
+              </p>
+              <p>
+                <strong>Bio:</strong> {user?.bio || "—"}
+              </p>
+            </div>
 
-          <form
-            onSubmit={formik.handleSubmit}
-            className={styles.form}
-            noValidate
-          >
-            <div className={styles.cardSection}>
-              <h4 className={styles.sectionTitle}>Update Profile</h4>
-              <div className={styles.fieldGroup}>
-                <label className={styles.label}>
-                  Name
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    className={styles.input}
-                  />
-                </label>
+            <form
+              onSubmit={formik.handleSubmit}
+              className={styles.form}
+              noValidate
+            >
+              <div className={styles.cardSection}>
+                <h4 className={styles.sectionTitle}>Update Profile</h4>
+                <div className={styles.fieldGroup}>
+                  <label className={styles.label}>
+                    Name
+                    <input
+                      type="text"
+                      name="name"
+                      onChange={formik.handleChange}
+                      value={formik.values.name}
+                      className={styles.input}
+                    />
+                  </label>
 
-                <label className={styles.label}>
-                  Email
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                    className={styles.input}
-                    required
-                  />
-                  {formik.touched.email && formik.errors.email && (
-                    <p className={styles.error}>{formik.errors.email}</p>
-                  )}
-                </label>
+                  <label className={styles.label}>
+                    Email
+                    <input
+                      type="email"
+                      name="email"
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                      className={styles.input}
+                      required
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                      <p className={styles.error}>{formik.errors.email}</p>
+                    )}
+                  </label>
 
-                <label className={styles.label}>
-                  Bio
-                  <textarea
-                    name="bio"
-                    onChange={formik.handleChange}
-                    value={formik.values.bio}
-                    className={styles.input}
-                    rows="3"
-                  />
-                </label>
+                  <label className={styles.label}>
+                    Bio
+                    <textarea
+                      name="bio"
+                      onChange={formik.handleChange}
+                      value={formik.values.bio}
+                      className={styles.input}
+                      rows="3"
+                    />
+                  </label>
+                </div>
               </div>
-            </div>
 
-            <div className={styles.cardSection}>
-              <h4 className={styles.sectionTitle}>Change Password</h4>
-              <div className={styles.fieldGroup}>
-                <PasswordField
-                  label="New Password"
-                  name="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  placeholder="Leave blank to keep current"
-                  error={formik.touched.password && formik.errors.password}
-                />
-                <PasswordField
-                  label="Confirm Password"
-                  name="passwordConfirm"
-                  value={formik.values.passwordConfirm}
-                  onChange={formik.handleChange}
-                  placeholder="Repeat new password"
-                  error={
-                    formik.touched.passwordConfirm &&
-                    formik.errors.passwordConfirm
-                  }
-                />
+              <div className={styles.cardSection}>
+                <h4 className={styles.sectionTitle}>Change Password</h4>
+                <div className={styles.fieldGroup}>
+                  <PasswordField
+                    label="New Password"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    placeholder="Leave blank to keep current"
+                    error={formik.touched.password && formik.errors.password}
+                  />
+                  <PasswordField
+                    label="Confirm Password"
+                    name="passwordConfirm"
+                    value={formik.values.passwordConfirm}
+                    onChange={formik.handleChange}
+                    placeholder="Repeat new password"
+                    error={
+                      formik.touched.passwordConfirm &&
+                      formik.errors.passwordConfirm
+                    }
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className={styles.buttonWrapper}>
-              <Button
-                type="submit"
-                className="edit"
-                disabled={formik.isSubmitting || !formik.isValid}
-              >
-                {formik.isSubmitting ? "Saving..." : "Save changes"}
-              </Button>
-            </div>
-          </form>
+              <div className={styles.buttonWrapper}>
+                <Button
+                  type="submit"
+                  className="edit"
+                  disabled={formik.isSubmitting || !formik.isValid}
+                >
+                  {formik.isSubmitting ? "Saving..." : "Save changes"}
+                </Button>
+              </div>
+            </form>
 
-          {message && (
-            <p className={`${styles.message} ${styles.success}`}>{message}</p>
-          )}
-          {error && (
-            <p className={`${styles.message} ${styles.error}`}>{error}</p>
-          )}
+            {message && (
+              <p className={`${styles.message} ${styles.success}`}>{message}</p>
+            )}
+            {error && (
+              <p className={`${styles.message} ${styles.error}`}>{error}</p>
+            )}
 
-          <div className={styles.dangerZone}>
-            <h4 className={styles.dangerZoneTitle}>Danger Zone</h4>
-            <p className={styles.warningText}>
-              Once deleted, your account and all data cannot be recovered.
-            </p>
-            <div className={styles.buttonWrapper}>
-              <Button
-                type="button"
-                className="deleteAccount"
-                onClick={handleDeleteAccount}
-              >
-                Delete Account Permanently
-              </Button>
+            <div className={styles.dangerZone}>
+              <h4 className={styles.dangerZoneTitle}>Danger Zone</h4>
+              <p className={styles.warningText}>
+                Once deleted, your account and all data cannot be recovered.
+              </p>
+              <div className={styles.buttonWrapper}>
+                <Button
+                  type="button"
+                  className="deleteAccount"
+                  onClick={handleDeleteAccount}
+                >
+                  Delete Account Permanently
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -64,11 +64,12 @@ export default function GoalsPage() {
     <>
       <WavesLottie variant="lavanda" />
       <div className={styles.container}>
-        <h2 className={styles.title}>Your Goals 🎯</h2>
-        <p className={styles.subheading}>
-          Stay focused and achieve your personal goals
-        </p>
-
+        <div className={styles.headerBox}>
+          <h2 className={styles.title}>Your Goals 🎯</h2>
+          <p className={styles.subheading}>
+            Stay focused and achieve your personal goals
+          </p>
+        </div>
         <div className={styles.inputGroup}>
           <input
             className={styles.input}

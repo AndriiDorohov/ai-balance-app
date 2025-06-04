@@ -22,13 +22,20 @@
     font-family: "Quicksand", "Segoe UI", sans-serif;
     overflow-x: hidden;
 }
+.headerBox {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    background: transparent;
+    font-family: "Quicksand", "Segoe UI", sans-serif;
+}
 
 .title {
     font-size: 2.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: rgba(0, 0, 0, 0.6);
-    text-align: center;
     animation: pulse 4s ease-in-out infinite;
 }
 

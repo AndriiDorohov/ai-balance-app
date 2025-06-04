@@ -12,8 +12,16 @@
         opacity: 0.9;
     }
 }
-
 .container {
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    font-family: "Quicksand", "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
+.card {
     position: relative;
     z-index: 1;
     max-width: 700px;
@@ -27,8 +35,11 @@
 }
 
 .headerBox {
+    position: relative;
+    z-index: 10;
     text-align: center;
     padding: 2rem 1rem 1rem;
+    background: transparent;
     font-family: "Quicksand", "Segoe UI", sans-serif;
 }
 
@@ -37,6 +48,7 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: rgba(0, 0, 0, 0.6);
+    animation: pulse 4s ease-in-out infinite;
 }
 
 .subheading {

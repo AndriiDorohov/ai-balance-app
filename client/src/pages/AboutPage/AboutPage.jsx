@@ -9,10 +9,12 @@ export default function AboutPage() {
       <WavesLottie variant="default" />
 
       <div className={styles.container}>
-        <h1 className={styles.title}>Welcome to AI Balance</h1>
-        <p className={styles.subheading}>
-          Your personal space to reflect, grow, and stay emotionally balanced
-        </p>
+        <div className={styles.headerBox}>
+          <h1 className={styles.title}>Welcome to AI Balance 🌱</h1>
+          <p className={styles.subheading}>
+            Your personal space to reflect, grow, and stay emotionally balanced
+          </p>
+        </div>
 
         <div className={styles.section}>
           <h3>What is AI Balance?</h3>
