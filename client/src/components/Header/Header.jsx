@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/AuthContext";
 import { useWeb3 } from "../../web3/context/Web3Context";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 export default function Header() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const location = useLocation();
   const { account, balance } = useWeb3();
 
   const [shrink, setShrink] = useState(false);
@@ -35,18 +36,47 @@ export default function Header() {
     }
   };
 
+  const isActive = (path) => (location.pathname === path ? styles.active : "");
+
   return (
     <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <div className={styles.logo} onClick={() => navigate("/dashboard")}>
         AI Balance
       </div>
       <nav className={styles.nav}>
-        <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-        <button onClick={() => navigate("/history")}>History</button>
-        <button onClick={() => navigate("/goals")}>Goals</button>
-        <button onClick={() => navigate("/settings")}>Settings</button>
-        <button onClick={() => navigate("/about")}>About</button>
-        <button onClick={() => navigate("/web3")}>Web3</button>
+        <button
+          onClick={() => navigate("/dashboard")}
+          className={isActive("/dashboard")}
+        >
+          Dashboard
+        </button>
+        <button
+          onClick={() => navigate("/history")}
+          className={isActive("/history")}
+        >
+          History
+        </button>
+        <button
+          onClick={() => navigate("/goals")}
+          className={isActive("/goals")}
+        >
+          Goals
+        </button>
+        <button
+          onClick={() => navigate("/settings")}
+          className={isActive("/settings")}
+        >
+          Settings
+        </button>
+        <button
+          onClick={() => navigate("/about")}
+          className={isActive("/about")}
+        >
+          About
+        </button>
+        <button onClick={() => navigate("/web3")} className={isActive("/web3")}>
+          Web3
+        </button>
         {account && (
           <button
             onClick={() =>

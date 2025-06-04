@@ -60,10 +60,14 @@
     gap: 0.5rem;
     flex-wrap: wrap;
 }
-
-.active {
-    border-bottom: 2px solid #7f5af0;
-    color: #7f5af0;
+.nav button.active {
+    color: #b388eb;
+    font-weight: 700;
+    border-bottom: 2px solid #b388eb;
+    transition:
+        color 0.3s ease,
+        border-bottom 0.3s ease;
+    background: none;
 }
 
 .account {
@@ -112,4 +116,13 @@
 
 .shrink .nav button {
     font-size: 0.9rem;
+}
+
+.active {
+    color: #4f46e5;
+    font-weight: 700;
+    border-bottom: 2px solid #4f46e5;
+    transition:
+        color 0.3s ease,
+        border-bottom 0.3s ease;
 }
