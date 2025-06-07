@@ -126,3 +126,8 @@
         color 0.3s ease,
         border-bottom 0.3s ease;
 }
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}

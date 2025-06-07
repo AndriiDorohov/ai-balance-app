@@ -117,3 +117,20 @@
     background-color: #e0f7f4;
     color: #00695c;
 }
+.button.landingLogin {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.button.landingLogin:hover {
+    background-color: #3730a3;
+}
+
+.button.landingRegister {
+    background-color: #2dd4bf;
+    color: white;
+}
+
+.button.landingRegister:hover {
+    background-color: #0d9488;
+}

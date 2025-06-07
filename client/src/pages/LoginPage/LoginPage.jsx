@@ -45,58 +45,60 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <WavesLottie variant="default" />
 
       <div className={styles.container}>
-        <h1 className={styles.title}>Welcome Back!</h1>
-        <form onSubmit={handleLogin} className={styles.form}>
-          <label className={styles.label}>
-            Email
-            <input
-              type="email"
-              className={styles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your.email@example.com"
-              required
-            />
-          </label>
+        <div className={styles.headerBox}>
+          <h1 className={styles.title}>Welcome Back!</h1>
+          <form onSubmit={handleLogin} className={styles.form}>
+            <label className={styles.label}>
+              Email
+              <input
+                type="email"
+                className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                required
+              />
+            </label>
 
-          <label className={styles.label}>
-            Password
-            <PasswordField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
-          </label>
+            <label className={styles.label}>
+              Password
+              <PasswordField
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+            </label>
 
-          {error && <p className={styles.error}>{error}</p>}
+            {error && <p className={styles.error}>{error}</p>}
 
-          <button type="submit" className={styles.button}>
-            Log In
-          </button>
-        </form>
+            <button type="submit" className={styles.button}>
+              Log In
+            </button>
+          </form>
 
-        <p className={styles.registerText}>
-          Don’t have an account?{" "}
-          <Link to="/register" className={styles.link}>
-            Register
-          </Link>
-        </p>
-        <p className={styles.resendText}>
-          Didn’t get the email?{" "}
-          <button
-            type="button"
-            onClick={handleResend}
-            className={styles.resendLink}
-          >
-            Resend
-          </button>
-        </p>
+          <p className={styles.registerText}>
+            Don’t have an account?{" "}
+            <Link to="/register" className={styles.link}>
+              Register
+            </Link>
+          </p>
+          <p className={styles.resendText}>
+            Didn’t get the email?{" "}
+            <button
+              type="button"
+              onClick={handleResend}
+              className={styles.resendLink}
+            >
+              Resend
+            </button>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

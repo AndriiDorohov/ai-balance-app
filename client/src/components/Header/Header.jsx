@@ -7,26 +7,19 @@ import toast from "react-hot-toast";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
   const location = useLocation();
   const { account, balance } = useWeb3();
-
+  const { logout, token } = useAuth();
+  const isAuthenticated = Boolean(token);
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setShrink(true);
-      } else {
-        setShrink(false);
-      }
+      setShrink(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const copyAddress = () => {
@@ -40,43 +33,51 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
-      <div className={styles.logo} onClick={() => navigate("/dashboard")}>
+      <div
+        className={styles.logo}
+        onClick={() => navigate(isAuthenticated ? "/dashboard" : "/")}
+      >
         AI Balance
       </div>
+
       <nav className={styles.nav}>
         <button
-          onClick={() => navigate("/dashboard")}
-          className={isActive("/dashboard")}
+          onClick={() => isAuthenticated && navigate("/dashboard")}
+          className={`${isActive("/dashboard")} ${!isAuthenticated ? styles.disabled : ""}`}
         >
           Dashboard
         </button>
         <button
-          onClick={() => navigate("/history")}
-          className={isActive("/history")}
+          onClick={() => isAuthenticated && navigate("/history")}
+          className={`${isActive("/history")} ${!isAuthenticated ? styles.disabled : ""}`}
         >
           History
         </button>
         <button
-          onClick={() => navigate("/goals")}
-          className={isActive("/goals")}
+          onClick={() => isAuthenticated && navigate("/goals")}
+          className={`${isActive("/goals")} ${!isAuthenticated ? styles.disabled : ""}`}
         >
           Goals
         </button>
         <button
-          onClick={() => navigate("/settings")}
-          className={isActive("/settings")}
+          onClick={() => isAuthenticated && navigate("/settings")}
+          className={`${isActive("/settings")} ${!isAuthenticated ? styles.disabled : ""}`}
         >
           Settings
         </button>
         <button
-          onClick={() => navigate("/about")}
-          className={isActive("/about")}
+          onClick={() => isAuthenticated && navigate("/about")}
+          className={`${isActive("/about")} ${!isAuthenticated ? styles.disabled : ""}`}
         >
           About
         </button>
-        <button onClick={() => navigate("/web3")} className={isActive("/web3")}>
+        <button
+          onClick={() => isAuthenticated && navigate("/web3")}
+          className={`${isAuthenticated ? isActive("/web3") : ""} ${!isAuthenticated ? styles.disabled : ""}`}
+        >
           Web3
         </button>
+
         {account && (
           <button
             onClick={() =>
@@ -90,7 +91,20 @@ export default function Header() {
             {parseFloat(balance).toFixed(4)} ETH)
           </button>
         )}
-        <button onClick={logout}>Logout</button>
+        {!isAuthenticated ? (
+          <>
+            <button onClick={() => navigate("/login")}>Login/Register</button>
+          </>
+        ) : (
+          <button
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
+        )}
       </nav>
     </header>
   );

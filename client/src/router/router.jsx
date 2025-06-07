@@ -6,6 +6,8 @@ import {
   redirect,
 } from "react-router-dom";
 
+import RootLayout from "../layouts/RootLayout";
+
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
@@ -17,6 +19,7 @@ import AboutPage from "../pages/AboutPage/AboutPage";
 import MainLayout from "../layouts/MainLayout";
 import VerifyEmailPage from "../pages/VerifyEmailPage/VerifyEmailPage";
 import Web3Page from "../pages/Web3Page/Web3Page";
+import LandingPage from "../pages/LandingPage/LandingPage";
 
 const requireAuth = () => {
   const token = localStorage.getItem("token");
@@ -24,11 +27,18 @@ const requireAuth = () => {
   return null;
 };
 
+const landingRedirect = () => {
+  const token = localStorage.getItem("token");
+  if (token) throw redirect("/dashboard");
+  return null;
+};
+
 export default function createAppRouter() {
   return createBrowserRouter(
     createRoutesFromElements(
-      <>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+      <Route path="/" element={<RootLayout />}>
+        <Route index loader={landingRedirect} element={<LandingPage />} />
+
         <Route element={<MainLayout />}>
           <Route path="/about" element={<AboutPage />} />
           <Route
@@ -50,10 +60,11 @@ export default function createAppRouter() {
           />
           <Route path="/web3" element={<Web3Page />} loader={requireAuth} />
         </Route>
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/verify-email" element={<VerifyEmailPage />} />{" "}
-      </>,
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
+      </Route>,
     ),
   );
 }
