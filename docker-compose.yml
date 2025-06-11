@@ -1,4 +1,4 @@
-version: '3.9'
+# version: '3.9'
 
 services:
   frontend:
@@ -16,7 +16,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./server/.env
     ports:
       - "8000:8000"
     depends_on:
@@ -33,8 +33,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: yourpassword
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
       - ./server/full_dump.sql:/docker-entrypoint-initdb.d/init.sql
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
