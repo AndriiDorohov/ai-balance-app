@@ -2,9 +2,10 @@
 
 services:
   frontend:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+    image: frontend
+    # build:
+    #   context: ./client
+      # dockerfile: Dockerfile
     ports:
       - "3000:80"
     depends_on:
@@ -12,9 +13,10 @@ services:
     restart: always
 
   backend:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    image: backend
+    # build:
+    #   context: ./server
+      # dockerfile: Dockerfile
     env_file:
       - ./server/.env
     ports:
