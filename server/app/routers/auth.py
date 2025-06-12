@@ -24,7 +24,7 @@ def get_db():
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
-@router.post("/auth/register")
+@router.post("/register")
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
 
