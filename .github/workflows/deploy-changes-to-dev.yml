@@ -67,8 +67,8 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} << 'EOF'
         cd ~/${{ env.REPO_NAME }}
         # git fetch origin 
-        # git reset --hard origin/main 
+        # git reset --hard origin/main
         git pull
-        docker compose up -d
+        docker compose down
+        docker compose up --build -d
         EOF
-        

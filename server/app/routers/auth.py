@@ -50,7 +50,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
     return {"message": "Registration successful. Please check your email to verify your account."}
 
 
-@router.post("/auth/login")
+@router.post("/login")
 def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == form_data.username).first()
 
@@ -63,7 +63,7 @@ def login_user(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = D
     token = create_access_token(data={"sub": db_user.email})
     return {"access_token": token, "token_type": "bearer"}
 
-@router.post("/auth/resend-verification")
+@router.post("/resend-verification")
 def resend_verification(data: EmailRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == data.email).first()
     if not user:

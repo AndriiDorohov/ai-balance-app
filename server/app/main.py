@@ -19,7 +19,7 @@ app.add_middleware(
 app.include_router(status.router, prefix="/api")
 app.include_router(gpt.router, prefix="/api")
 app.include_router(entry.router, prefix="/api")
-app.include_router(auth.router, prefix="/api/auth")
+app.include_router(auth.router, prefix="/api")
 app.include_router(goals.router, prefix="/api")
 app.include_router(user.router, prefix="/api")
 app.include_router(email.router, prefix="/api")
