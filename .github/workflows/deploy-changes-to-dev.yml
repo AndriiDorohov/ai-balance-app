@@ -2,19 +2,17 @@ name: Deploy changes to Dev
 
 on:
   push:
-    branches:
-      - main
+     branches:
+       - main
   workflow_dispatch:
 
 jobs:
   deploy-to-server:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GH_PAT }}
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -37,6 +35,7 @@ jobs:
           --filters "Name=tag:Name,Values=${{ env.REPO_NAME }}" "Name=instance-state-name,Values=running" \
           --query "Reservations[0].Instances[0].PublicIpAddress" \
           --output text)
+
         echo "PUBLIC_IP=$PUBLIC_IP" >> $GITHUB_ENV
 
     - name: Create .env for frontend
@@ -60,29 +59,15 @@ jobs:
         cd ../client
         docker build --platform linux/amd64 -f ./Dockerfile -t frontend .
         cd ..
+        ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker system prune -af'
 
-        echo "Cleaning up Docker on remote server"
-        ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker system prune -af || true'
-
-        echo "Sending Docker images to remote server"
-        docker save backend:latest | ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker load'
-        docker save frontend:latest | ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker load'
-
-        echo "Starting deployment on remote server"
-        ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} << EOF
-          set -e
-          cd ~/${{ env.REPO_NAME }} || { echo 'Project directory not found'; exit 1; }
-
-          echo "Pulling latest changes"
-          git pull
-
-          echo "Stopping existing containers"
-          docker compose down || echo "No containers running"
-
-          echo "Starting containers with rebuild"
-          docker compose up --build -d
-
-          echo "Deployment complete"
-          docker compose ps
-          docker compose logs --tail=50
+        docker save backend:latest  | ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker load'
+        docker save frontend:latest  | ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} 'docker load'                 
+                 
+        ssh -o StrictHostKeyChecking=no -i ../id_ed25519 ubuntu@${{ env.PUBLIC_IP }} << 'EOF'
+        cd ~/${{ env.REPO_NAME }}
+        # git fetch origin 
+        # git reset --hard origin/main 
+        git pull
+        docker compose up -d
         EOF
