@@ -1,7 +1,8 @@
-FROM node:20 as build
+FROM node:20
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install && export NODE_OPTIONS="--max-old-space-size=5096"
+
 RUN npm run build
 
 FROM nginx:alpine
