@@ -1,9 +1,8 @@
 services:
   frontend:
-    image: frontend
-    # build:
-    #   context: ./client
-      # dockerfile: Dockerfile
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
     depends_on:
@@ -11,10 +10,9 @@ services:
     restart: always
 
   backend:
-    image: backend
-    # build:
-    #   context: ./server
-      # dockerfile: Dockerfile
+    build:
+      context: ./server
+      dockerfile: Dockerfile
     env_file:
       - ./server/.env
     ports:
@@ -35,6 +33,3 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
       - ./server/full_dump.sql:/docker-entrypoint-initdb.d/init.sql
-
-# volumes:
-#   postgres_data:

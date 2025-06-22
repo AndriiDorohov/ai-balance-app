@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     SMTP_PORT: int
     SMTP_USER: str
     SMTP_PASSWORD: str
-    FRONTEND_URL: str = "http://localhost:5173"
+    FRONTEND_URL: str = ""
 
     SECURITY_PASSWORD_SALT: str = "email-confirm"
 
